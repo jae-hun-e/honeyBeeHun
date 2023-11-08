@@ -3,6 +3,8 @@
 import styled from "styled-components";
 import { useState } from "react";
 
+import MyToggle from "@/app/(route)/test/HeadLess";
+
 interface props {
   width: string;
   height: string;
@@ -20,6 +22,7 @@ export default function CssTest({ width, height }: props) {
         cnt : {cnt}
       </SkeletonInner>
       <button onClick={() => setCnt(cnt + 1)}>버튼</button>
+      <MyToggle />
     </div>
   );
 }

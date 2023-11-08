@@ -1,4 +1,4 @@
-import CssTest from "@/app/(route)/posts/StyleComponent";
+import CssTest from "@/app/(route)/test/StyleComponent";
 
 export default function Posts() {
   return (
