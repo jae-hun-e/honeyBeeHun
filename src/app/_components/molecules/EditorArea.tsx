@@ -1,21 +1,13 @@
-import { MutableRefObject, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import Button from "@atoms/Button";
+import { MutableRefObject } from "react";
 
 interface IProps {
   onSubmit(): void;
+  onSave(): void;
+  editorRef: MutableRefObject<Editor | null>;
+  initialValue: string;
 }
-const EditorArea = ({ onSubmit }: IProps) => {
-  const editorRef = useRef<Editor | null>(null);
-  const initialValue = "내용을 입력해 주세요.";
-  const [content, setContent] = useState(initialValue);
-  const onSaveContent = () => {
-    if (editorRef.current) {
-      setContent(editorRef.current.getContent());
-      document.querySelector("[data-id=content]").innerHTML = content;
-    }
-  };
-
+const EditorArea = ({ onSubmit, onSave, initialValue, editorRef }: IProps) => {
   const plugins = [
     "advlist",
     "autolink",
@@ -36,7 +28,6 @@ const EditorArea = ({ onSubmit }: IProps) => {
     "help",
     "wordcount",
   ];
-
   const toolbar = [
     "undo redo | blocks | " +
       "bold italic forecolor | alignleft aligncenter " +
@@ -46,28 +37,24 @@ const EditorArea = ({ onSubmit }: IProps) => {
 
   return (
     <div className="flex">
-      <div className="w-1/2">
-        <Editor
-          apiKey={process.env.EDITOR_KEY}
-          onKeyPress={onSaveContent}
-          onInit={(evt, editor) => (editorRef.current = editor)}
-          initialValue={initialValue}
-          init={{
-            language: "ko_KR",
-            height: 500,
-            width: "100%",
-            menubar: false,
-            plugins,
-            toolbar,
-            tinycomments_mode: "embedded",
-            tinycomments_author: "Author name",
-            content_style:
-              "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-          }}
-        />
-      </div>
-      <div className="w-1/2" data-id="content"></div>
-      <Button onClick={onSubmit}>submit</Button>
+      <Editor
+        apiKey={process.env.EDITOR_KEY}
+        onKeyDown={onSave}
+        onInit={(_, editor) => editorRef && (editorRef.current = editor)}
+        initialValue={initialValue}
+        init={{
+          language: "ko_KR",
+          height: 500,
+          width: "100%",
+          menubar: false,
+          plugins,
+          toolbar,
+          tinycomments_mode: "embedded",
+          tinycomments_author: "Author name",
+          content_style:
+            "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+        }}
+      />
     </div>
   );
 };
