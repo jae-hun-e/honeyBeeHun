@@ -5,9 +5,13 @@ interface IProps {
   onSave(): void;
   editorRef: MutableRefObject<Editor | null>;
   initialValue: string;
-  height: number;
+  size: Size;
 }
-const EditorArea = ({ onSave, initialValue, editorRef, height }: IProps) => {
+interface Size {
+  height: number;
+  width?: number;
+}
+const EditorArea = ({ onSave, initialValue, editorRef, size }: IProps) => {
   const plugins = [
     "advlist",
     "autolink",
@@ -38,7 +42,7 @@ const EditorArea = ({ onSave, initialValue, editorRef, height }: IProps) => {
 
   const init = {
     language: "ko_KR",
-    height,
+    height: size.height,
     width: "100%",
     menubar: false,
     plugins,

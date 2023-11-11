@@ -1,21 +1,10 @@
+import { Size, Weight } from "@/app/_types/globalEnum";
+
 interface IProps {
   styleProps?: string;
   text: string;
   size?: Size;
   weight?: Weight;
-}
-
-export enum Size {
-  small = 14,
-  regular = 16,
-  large = 20,
-  extraLarge = 30,
-}
-
-export enum Weight {
-  regular = 400,
-  bold = 700,
-  extraBold = 800,
 }
 
 const Span = ({
@@ -29,9 +18,9 @@ const Span = ({
     fontWeight: weight,
   };
   return (
-    <p className={styleProps} style={style}>
+    <span className={styleProps} style={style}>
       {text}
-    </p>
+    </span>
   );
 };
 

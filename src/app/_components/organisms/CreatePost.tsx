@@ -12,7 +12,7 @@ export default function CreatePost() {
   const router = useRouter();
   const initDate = {
     initialValue: "내용을 입력해 주세요.",
-    size: 500,
+    height: 500,
   };
 
   const editorRef = useRef<Editor | null>(null);
@@ -52,11 +52,15 @@ export default function CreatePost() {
             onSave={onSaveContent}
             initialValue={initDate.initialValue}
             editorRef={editorRef}
-            height={initDate.size}
+            size={{ height: initDate.height }}
           />
         </div>
         <div className="w-1/2 " data-id="content">
-          <PreviewArea title={title} content={content} height={initDate.size} />
+          <PreviewArea
+            title={title}
+            content={content}
+            size={{ height: initDate.height }}
+          />
         </div>
       </div>
       <Button onClick={onSubmitContent} styleProps="text-2xl border-2 block">

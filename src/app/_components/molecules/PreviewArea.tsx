@@ -5,9 +5,14 @@ import styled from "styled-components";
 interface IProps {
   title: string;
   content: string;
-  height: number;
+  size: Size;
 }
-const PreviewArea = ({ title, content, height }: IProps) => {
+
+interface Size {
+  height: number;
+  width?: number;
+}
+const PreviewArea = ({ title, content, size }: IProps) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -28,7 +33,7 @@ const PreviewArea = ({ title, content, height }: IProps) => {
           ref={contentRef}
           dangerouslySetInnerHTML={{ __html: content }}
           className="pt-[90px] overflow-y-auto"
-          height={height - 20}
+          height={size.height - 20}
         />
       </div>
     </div>
