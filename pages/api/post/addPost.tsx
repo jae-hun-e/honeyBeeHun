@@ -10,10 +10,13 @@ export default async function handler(
 ) {
   if (request.method === "POST") {
     const { title, content } = JSON.parse(request.body);
+    if (title === "" || content === "") {
+      return response.status(500).json({ message: "글 쓰고 보내라" });
+    }
     try {
       const db = (await connectDB).db("blog");
 
-      const result = await db
+      await db
         .collection("posts")
         .insertOne({ date: new Date(), title, content });
 

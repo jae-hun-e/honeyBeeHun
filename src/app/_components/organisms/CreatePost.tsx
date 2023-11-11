@@ -22,7 +22,11 @@ export default function CreatePost() {
 
   const onSubmitContent = async () => {
     try {
-      await request("/api/post/addPost", "POST", { title, content });
+      const res = await request("/api/post/addPost", "POST", {
+        title,
+        content,
+      });
+
       router.push("/posts");
     } catch (e) {
       console.log(e);
@@ -31,7 +35,7 @@ export default function CreatePost() {
 
   const onSaveContent = () => {
     if (editorRef.current) {
-      setContent(() => editorRef.current.getContent());
+      setContent(() => editorRef.current && editorRef.current.getContent());
     }
   };
 
@@ -51,11 +55,13 @@ export default function CreatePost() {
             height={initDate.size}
           />
         </div>
-        <div className="w-1/2" data-id="content">
+        <div className="w-1/2 " data-id="content">
           <PreviewArea title={title} content={content} height={initDate.size} />
         </div>
       </div>
-      <Button onClick={onSubmitContent}>submit</Button>
+      <Button onClick={onSubmitContent} styleProps="text-2xl border-2 block">
+        submit
+      </Button>
     </div>
   );
 }
