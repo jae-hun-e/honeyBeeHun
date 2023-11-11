@@ -1,13 +1,13 @@
 import { Editor } from "@tinymce/tinymce-react";
-import { MutableRefObject } from "react";
+import { MutableRefObject, useEffect } from "react";
 
 interface IProps {
-  onSubmit(): void;
   onSave(): void;
   editorRef: MutableRefObject<Editor | null>;
   initialValue: string;
+  height: number;
 }
-const EditorArea = ({ onSubmit, onSave, initialValue, editorRef }: IProps) => {
+const EditorArea = ({ onSave, initialValue, editorRef, height }: IProps) => {
   const plugins = [
     "advlist",
     "autolink",
@@ -25,35 +25,36 @@ const EditorArea = ({ onSubmit, onSave, initialValue, editorRef }: IProps) => {
     "media",
     "table",
     "code",
-    "help",
     "wordcount",
   ];
   const toolbar = [
     "undo redo | blocks | " +
       "bold italic forecolor | alignleft aligncenter " +
       "alignright alignjustify | bullist numlist outdent indent | " +
-      "removeformat | help",
+      "removeformat ",
   ];
 
+  const content_style =
+    "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }";
+
+  const init = {
+    language: "ko_KR",
+    height,
+    width: "100%",
+    menubar: false,
+    plugins,
+    toolbar,
+    content_style,
+  };
+  // TODO: onKeyUp일때만 즉시 반영됨, onKeyDown, onKeyPress는 반영 안됨 이들의 차이를 알아보자
   return (
     <div className="flex">
       <Editor
         apiKey={process.env.EDITOR_KEY}
-        onKeyDown={onSave}
+        onKeyUp={onSave}
         onInit={(_, editor) => editorRef && (editorRef.current = editor)}
         initialValue={initialValue}
-        init={{
-          language: "ko_KR",
-          height: 500,
-          width: "100%",
-          menubar: false,
-          plugins,
-          toolbar,
-          tinycomments_mode: "embedded",
-          tinycomments_author: "Author name",
-          content_style:
-            "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-        }}
+        init={init}
       />
     </div>
   );
