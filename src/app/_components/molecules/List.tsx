@@ -1,7 +1,7 @@
-import P from "@atoms/P";
+import Span from "@atoms/Span";
 import React from "react";
 
 const List = () => {
-  return <P text="test"></P>;
+  return <Span text="test"></Span>;
 };
 export default List;

@@ -1,15 +1,15 @@
 import React from "react";
 
 interface IProps {
-  classProps?: string;
+  styleProps?: string;
   children?: React.ReactNode;
   text?: string;
   onClick(event: React.FormEvent<HTMLButtonElement>): void;
 }
 
-const Button = ({ classProps, children, text, onClick }: IProps) => {
+const Button = ({ styleProps, children, text, onClick }: IProps) => {
   return (
-    <button className={classProps} onClick={onClick}>
+    <button className={styleProps} onClick={onClick}>
       {text}
       {children}
     </button>

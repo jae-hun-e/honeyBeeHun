@@ -1,5 +1,5 @@
 interface IProps {
-  classProps?: string;
+  styleProps?: string;
   text: string;
   size?: Size;
   weight?: Weight;
@@ -18,8 +18,8 @@ export enum Weight {
   extraBold = 800,
 }
 
-const P = ({
-  classProps,
+const Span = ({
+  styleProps,
   size = Size.regular,
   text,
   weight = Weight.regular,
@@ -29,10 +29,10 @@ const P = ({
     fontWeight: weight,
   };
   return (
-    <p className={classProps} style={style}>
+    <p className={styleProps} style={style}>
       {text}
     </p>
   );
 };
 
-export default P;
+export default Span;

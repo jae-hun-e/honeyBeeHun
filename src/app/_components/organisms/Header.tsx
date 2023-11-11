@@ -1,8 +1,10 @@
 "use client";
 import Button from "@atoms/Button";
-import P from "@atoms/P";
+import Span from "@atoms/Span";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import ToggleBtn from "@molecules/ToggleBtn";
+import Link from "next/link";
 
 const Header = () => {
   const [mounted, setMounted] = useState(false);
@@ -14,9 +16,11 @@ const Header = () => {
   }, []);
   if (!mounted) {
     return (
-      <div className="w-full h-[50px]">
-        <P text="현재 모드" />
-        <P text="header" />
+      <div className="flex justify-between items-center w-full h-[50px] ">
+        <Span text="HBH" />
+        <div>
+          <ToggleBtn onToggleClick={() => {}} text="현재 Dark모드"></ToggleBtn>
+        </div>
       </div>
     );
   }
@@ -25,11 +29,28 @@ const Header = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
   return (
-    <div className="w-full h-[50px] dark:bg-violet-300">
-      <Button onClick={handleTheme}>
-        {systemTheme ? "현재 Dark모드" : "현재 light모드"}
-      </Button>
-      <P text="header" />
+    <div className="flex justify-between items-center w-full h-[50px] ">
+      <Span text="HBH" />
+      <div>
+        <Link
+          href="/posts"
+          className="mr-10 no-underline text-black dark:text-white"
+        >
+          Posts
+        </Link>
+        <Link
+          href="/jjh"
+          className="mr-10 no-underline text-black dark:text-white"
+        >
+          About Me
+        </Link>
+      </div>
+      <div>
+        <ToggleBtn
+          onToggleClick={handleTheme}
+          text={systemTheme ? "현재 Dark모드" : "현재 light모드"}
+        ></ToggleBtn>
+      </div>
     </div>
   );
 };
