@@ -1,5 +1,5 @@
 import { Editor } from "@tinymce/tinymce-react";
-import { MutableRefObject, useEffect } from "react";
+import { MutableRefObject } from "react";
 
 interface IProps {
   onSave(): void;
@@ -33,7 +33,6 @@ const EditorArea = ({ onSave, initialValue, editorRef, height }: IProps) => {
       "alignright alignjustify | bullist numlist outdent indent | " +
       "removeformat ",
   ];
-
   const content_style =
     "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }";
 
@@ -46,6 +45,7 @@ const EditorArea = ({ onSave, initialValue, editorRef, height }: IProps) => {
     toolbar,
     content_style,
   };
+
   // TODO: onKeyUp일때만 즉시 반영됨, onKeyDown, onKeyPress는 반영 안됨 이들의 차이를 알아보자
   return (
     <div className="flex">

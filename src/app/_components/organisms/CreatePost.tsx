@@ -1,7 +1,7 @@
 "use client";
 import EditorArea from "@molecules/EditorArea";
 import PreviewArea from "@molecules/PreviewArea";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import Button from "@atoms/Button";
 

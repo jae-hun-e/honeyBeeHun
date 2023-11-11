@@ -9,10 +9,12 @@ interface IProps {
 }
 const PreviewArea = ({ title, content, height }: IProps) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     contentRef.current &&
       (contentRef.current.scrollTop = contentRef.current.scrollHeight);
   }, [content]);
+
   return (
     <div>
       <h1
