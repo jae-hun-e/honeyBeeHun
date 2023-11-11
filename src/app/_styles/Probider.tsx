@@ -1,13 +1,16 @@
 "use client";
 
-import { ThemeProvider } from "styled-components";
-import StyledComponentsRegistry from "@/app/_lib/registry";
+import { ThemeProvider as StyledComponentTheme } from "styled-components";
+import { ThemeProvider as TailwindTheme } from "next-themes";
+import StyledComponentsRegistry from "@/app/_styles/registry";
 import theme from "@/app/_styles/theme";
 
 const Providers = (props: React.PropsWithChildren) => {
   return (
     <StyledComponentsRegistry>
-      <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
+      <StyledComponentTheme theme={theme}>
+        <TailwindTheme attribute="class">{props.children}</TailwindTheme>
+      </StyledComponentTheme>
     </StyledComponentsRegistry>
   );
 };
