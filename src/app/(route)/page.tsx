@@ -1,9 +1,11 @@
 import { connectDB } from "@/app/_services/datebaseConnect";
+import ImageUpload from "@molecules/ImageUpload";
 
 export default async function Home() {
-  const db = (await connectDB).db("blog");
-  let result = await db.collection("test").find().toArray();
-  console.log("DB 연결 완료", result);
-
-  return <div>메인 페이지</div>;
+  return (
+    <div>
+      메인 페이지
+      <ImageUpload />
+    </div>
+  );
 }

@@ -34,8 +34,7 @@ const EditorArea = ({ onSave, initialValue, editorRef, size }: IProps) => {
   const toolbar = [
     "undo redo | blocks | " +
       "bold italic forecolor | alignleft aligncenter " +
-      "alignright alignjustify | bullist numlist outdent indent | " +
-      "removeformat ",
+      "alignright alignjustify | bullist numlist outdent indent | ",
   ];
   const content_style =
     "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }";
