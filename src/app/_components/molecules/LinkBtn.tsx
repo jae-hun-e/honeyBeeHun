@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import Button from "@atoms/Button";
 
 interface IProps {
   url: string;

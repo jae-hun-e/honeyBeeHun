@@ -4,6 +4,7 @@ import "../_styles/globals.css";
 import Providers from "@/app/_styles/Probider";
 import React from "react";
 import Header from "@organisms/Header";
+import Footer from "@organisms/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +20,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className}  bg-gray-200 h-[100vh]`}>
+      <body className={`${inter.className}   h-[100vh]`}>
         <Providers>
           <Header />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>

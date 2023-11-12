@@ -16,7 +16,7 @@ const PostThumbnail = ({ _id, title }: IPost) => {
       <LinkBtn
         key={_id.toString()}
         url={`/posts/${_id.toString()}`}
-        style={"w-full h-full"}
+        style={"w-full h-full "}
       >
         <Span text={title} size={Size.large} weight={Weight.regular} />
       </LinkBtn>

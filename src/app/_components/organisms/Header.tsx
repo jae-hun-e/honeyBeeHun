@@ -16,7 +16,7 @@ const Header = () => {
   }, []);
   if (!mounted) {
     return (
-      <div className="flex justify-between items-center w-full h-[50px] bg-white px-5">
+      <div className="flex justify-between items-center w-full h-[50px]  px-5">
         <Span text="HBH" />
         <div>
           <ToggleBtn onToggleClick={() => {}} text="현재 Dark모드"></ToggleBtn>
@@ -29,7 +29,7 @@ const Header = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
   return (
-    <div className="flex justify-between items-center w-full h-[50px] bg-white px-5">
+    <div className="flex justify-between items-center w-full h-[50px]  px-5">
       <Span text="HBH" />
       <div>
         <Link
