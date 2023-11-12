@@ -2,17 +2,17 @@ export const request = async (url: string, method: string, body?: any) => {
   try {
     if (method === "GET") {
       const res = await fetch(url, {
-        method: "GET",
+        method,
       });
 
-      if (!res.ok) throw new Error("get에서 뭔가 문제가...");
+      if (!res.ok) throw new Error("뭔가 문제가...");
 
       return await res.json();
     }
 
-    if (method === "POST") {
+    if (method === "POST" || method === "PUT" || method === "DELETE") {
       const res = await fetch(url, {
-        method: "POST",
+        method,
         body: JSON.stringify(body),
       });
 

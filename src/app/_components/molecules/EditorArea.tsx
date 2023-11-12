@@ -1,5 +1,5 @@
 import { Editor } from "@tinymce/tinymce-react";
-import { MutableRefObject } from "react";
+import { MutableRefObject, useEffect, useState } from "react";
 
 interface IProps {
   onSave(): void;
@@ -8,7 +8,7 @@ interface IProps {
   size: Size;
 }
 interface Size {
-  height: number;
+  height?: number;
   width?: number;
 }
 const EditorArea = ({ onSave, initialValue, editorRef, size }: IProps) => {
@@ -39,16 +39,17 @@ const EditorArea = ({ onSave, initialValue, editorRef, size }: IProps) => {
   ];
   const content_style =
     "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }";
-
   const init = {
     language: "ko_KR",
-    height: size.height,
-    width: "100%",
+    height: size.height || 500,
+    width: size.width || "100%",
     menubar: false,
     plugins,
     toolbar,
     content_style,
   };
+
+  const [content, _] = useState(initialValue);
 
   // TODO: onKeyUp일때만 즉시 반영됨, onKeyDown, onKeyPress는 반영 안됨 이들의 차이를 알아보자
   return (
@@ -57,7 +58,7 @@ const EditorArea = ({ onSave, initialValue, editorRef, size }: IProps) => {
         apiKey={process.env.EDITOR_KEY}
         onKeyUp={onSave}
         onInit={(_, editor) => editorRef && (editorRef.current = editor)}
-        initialValue={initialValue}
+        initialValue={content}
         init={init}
       />
     </div>
