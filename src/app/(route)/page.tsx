@@ -1,4 +1,3 @@
-import { connectDB } from "@/app/_services/datebaseConnect";
 import ImageUpload from "@molecules/ImageUpload";
 
 export default async function Home() {

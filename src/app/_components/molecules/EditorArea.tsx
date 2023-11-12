@@ -1,5 +1,7 @@
 import { Editor } from "@tinymce/tinymce-react";
 import { MutableRefObject, useEffect, useState } from "react";
+import { request } from "@/app/_services/dataFetch";
+import header from "@organisms/Header";
 
 interface IProps {
   onSave(): void;
@@ -12,6 +14,54 @@ interface Size {
   width?: number;
 }
 const EditorArea = ({ onSave, initialValue, editorRef, size }: IProps) => {
+  const url = "/api/image/test2";
+
+  const handleImageUpload_1 = async (
+    blobInfo: any,
+    success: any,
+    failure: any
+  ) => {
+    const formData = new FormData();
+    const blob = blobInfo.blob();
+    const fileName = blobInfo.filename();
+    const file = new File([blob], fileName, { type: blob.type });
+    // console.log("file", file);
+
+    // Blob 객체를 URL로 변환
+    const imageUrl = URL.createObjectURL(blob);
+    // success(imageUrl);
+  };
+
+  const handleImageUpload = async (
+    blobInfo: any,
+    success: any,
+    failure: any
+  ) => {
+    const formData = new FormData();
+
+    // 이미지 파일 추가
+    formData.append("image", blobInfo.blob(), blobInfo.filename());
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("이미지 업로드 실패");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("성공!", data.imageUrl);
+        success(data.imageUrl);
+      })
+      .catch((error) => {
+        console.error(error);
+        failure("이미지 업로드 실패");
+      });
+  };
+
   const plugins = [
     "advlist",
     "autolink",
@@ -38,6 +88,7 @@ const EditorArea = ({ onSave, initialValue, editorRef, size }: IProps) => {
   ];
   const content_style =
     "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }";
+
   const init = {
     language: "ko_KR",
     height: size.height || 500,
@@ -46,6 +97,8 @@ const EditorArea = ({ onSave, initialValue, editorRef, size }: IProps) => {
     plugins,
     toolbar,
     content_style,
+    // images_upload_url: url,
+    images_upload_handler: handleImageUpload,
   };
 
   const [content, _] = useState(initialValue);

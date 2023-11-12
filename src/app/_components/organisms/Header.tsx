@@ -30,7 +30,9 @@ const Header = () => {
   };
   return (
     <div className="flex justify-between items-center w-full h-[50px]  px-5">
-      <Span text="HBH" />
+      <Link href="/">
+        <Span text="HBH" />
+      </Link>
       <div>
         <Link
           href="/posts"
