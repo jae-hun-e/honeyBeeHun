@@ -50,6 +50,7 @@ export default function CreatePost({ initPostContent }: IProps) {
     }
   };
 
+  console.log(content);
   return (
     <div className="flex flex-col justify-center gap-10">
       <div className="flex w-full gap-3">

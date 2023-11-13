@@ -37,38 +37,40 @@ const EditorArea = ({ onSave, initialValue, editorRef, size }: IProps) => {
     success: any,
     failure: any
   ) => {
-    // const file = new File([blobInfo.blob()], blobInfo.filename(), {
-    //   type: blobInfo.blob().type,
-    // });
-    // const url = URL.createObjectURL(file);
-    // console.log(file, url);
-    // success(url);
+    const file = new File([blobInfo.blob()], blobInfo.filename(), {
+      type: blobInfo.blob().type,
+    });
+
+    const url = URL.createObjectURL(file);
+    console.log(file, url);
+    success(url);
 
     const formData = new FormData();
     // 이미지 파일 추가
-    formData.append("image", blobInfo.blob(), blobInfo.filename());
+    // formData.append("image", blobInfo.blob(), blobInfo.filename());
+    // formData.append("image", file, blobInfo.filename());
 
-    fetch(url, {
-      method: "POST",
-      body: formData,
-      // headers: {
-      //   "Content-Type": "application/json",
-      // },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("이미지 업로드 실패");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("성공!", data.imageUrl);
-        success(data.imageUrl);
-      })
-      .catch((error) => {
-        console.error(error);
-        // failure("이미지 업로드 실패");
-      });
+    // fetch(url, {
+    //   method: "POST",
+    //   body: formData,
+    //   // headers: {
+    //   //   "Content-Type": "application/json",
+    //   // },
+    // })
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error("이미지 업로드 실패");
+    //     }
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     console.log("성공!", data.imageUrl);
+    //     success(data.imageUrl);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //     // failure("이미지 업로드 실패");
+    //   });
   };
 
   const plugins = [
