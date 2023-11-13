@@ -5,6 +5,7 @@ import Providers from "@/app/_styles/Probider";
 import React from "react";
 import Header from "@organisms/Header";
 import Footer from "@organisms/Footer";
+import RecoilRootProvider from "@/app/_recoil/RecoilRootProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,9 +23,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className}   h-[100vh]`}>
         <Providers>
-          <Header />
-          {children}
-          <Footer />
+          <RecoilRootProvider>
+            <Header />
+            {children}
+            <Footer />
+          </RecoilRootProvider>
         </Providers>
       </body>
     </html>
