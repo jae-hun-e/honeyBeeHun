@@ -1,17 +1,13 @@
 import { atom } from "recoil";
 
-interface IUserData {
+export interface IUserData {
   user: {
     id: number;
     email: string;
+    image: string;
   };
 }
-export const userData = atom<IUserData>({
+export const userData = atom<IUserData | null>({
   key: "userinfo",
-  default: {
-    user: {
-      id: 0,
-      email: "",
-    },
-  },
+  default: null,
 });

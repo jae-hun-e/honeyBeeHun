@@ -2,6 +2,7 @@ import { connectDB } from "@/app/_services/datebaseConnect";
 import { IPostData } from "@/app/_types/postType";
 import { ObjectId } from "mongodb";
 import Span from "@atoms/Span";
+import Comment from "@/app/(route)/posts/[id]/Comment";
 
 export default async function DetailPost({
   params,
@@ -33,6 +34,9 @@ export default async function DetailPost({
         <Span text={`${year}년 ${month}월 ${day}일`} styleProps="text-end" />
         <div dangerouslySetInnerHTML={{ __html: content }}></div>
       </div>
+
+      <div>댓글 기능</div>
+      <Comment id={params.id} />
     </div>
   );
 }

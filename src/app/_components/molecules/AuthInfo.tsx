@@ -3,8 +3,10 @@
 import useAuth from "@/app/_hooks/useAuth";
 import LoginBtn from "@molecules/LoginBtn";
 import LogoutBtn from "@molecules/LogoutBtn";
+import { IUserData } from "@/app/_recoil/auth";
+import { SetterOrUpdater } from "recoil";
 
-const AuthInfo = ({ user }: { user: any }) => {
+const AuthInfo = ({ user }: { user }) => {
   const [info] = useAuth(user);
 
   return (
