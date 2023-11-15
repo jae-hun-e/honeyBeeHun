@@ -1,14 +1,14 @@
-import React from "react";
-interface IProps {
-  styleProps?: string;
-  children?: React.ReactNode;
+import { FC, FormEvent, ReactNode } from "react";
+export interface IButtonProps {
+  className?: string;
+  children?: ReactNode;
   text?: string;
-  onClick(event: React.FormEvent<HTMLButtonElement>): void;
+  onClick(event: FormEvent<HTMLButtonElement>): void;
 }
 
-const Button = ({ styleProps, children, text, onClick }: IProps) => {
+const Button: FC<IButtonProps> = ({ className, children, text, onClick }) => {
   return (
-    <button className={styleProps} onClick={onClick}>
+    <button className={className} onClick={onClick}>
       {text}
       {children}
     </button>
