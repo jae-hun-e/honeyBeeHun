@@ -18,7 +18,9 @@ const PostLists = ({ posts, isAdmin }: IPosts) => {
           className="flex relative w-[300px] h-[100px]  p-2  rounded-2xl shadow-md transition-scale duration-500
           dark:bg-sky-300 bg-sky-100 hover:scale-110 hover:shadow-lg"
         >
-          <PostThumbnail _id={_id.toString()} title={title} />
+          <PostThumbnail>
+            <PostThumbnail.linkBtn _id={_id.toString()} title={title} />
+          </PostThumbnail>
           {isAdmin && (
             <div className="absolute bottom-1 left-1 flex gap-2">
               <LinkBtn url={`/admin/edit/${_id.toString()}`}>✏️</LinkBtn>

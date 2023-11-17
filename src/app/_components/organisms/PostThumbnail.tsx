@@ -2,6 +2,7 @@ import Span from "@atoms/Span";
 import { Size, Weight } from "@/app/_types/globalEnum";
 import LinkBtn from "@molecules/LinkBtn";
 import Image from "@atoms/Image";
+import { ReactNode } from "react";
 
 interface IPost {
   _id: string;
@@ -9,19 +10,24 @@ interface IPost {
   style?: string;
 }
 
-// TODO: 대표 사진 추가하기
-const PostThumbnail = ({ _id, title }: IPost) => {
+const PostLinkBtn = ({ _id, title, style }: IPost) => {
   return (
-    <div className="w-full h-full">
-      <LinkBtn
-        key={_id.toString()}
-        url={`/posts/${_id.toString()}`}
-        style={"w-full h-full "}
-      >
-        <Span text={title} size={Size.large} weight={Weight.regular} />
-      </LinkBtn>
-      <div>이미지 추가</div>
-    </div>
+    <LinkBtn
+      key={_id.toString()}
+      url={`/posts/${_id.toString()}`}
+      style={style}
+    >
+      <Span text={title} size={Size.large} weight={Weight.regular} />
+    </LinkBtn>
   );
 };
+
+// TODO: 대표 사진 추가하기
+const PostThumbnail = ({ children }: { children: ReactNode }) => {
+  return <div className="w-full h-full">{children}</div>;
+};
+
+PostThumbnail.linkBtn = PostLinkBtn;
+PostThumbnail.image = Image;
+
 export default PostThumbnail;

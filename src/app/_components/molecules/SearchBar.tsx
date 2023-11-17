@@ -31,13 +31,16 @@ interface IProps {
 
 const SearchBar = ({ children, className, shareState }: IProps) => {
   return (
-    <CompoundContext.Provider value={{ shareState }}>
-      <div className={className}>{children}</div>
-    </CompoundContext.Provider>
+    <div className={className}>{children}</div>
+
+    // // 공유값이 있다면 contextAPI로
+    // <CompoundContext.Provider value={{ shareState }}>
+    //   <div className={className}>{children}</div>
+    // </CompoundContext.Provider>
   );
 };
 
-SearchBar.input = SearchBarInput;
+SearchBar.input = <Input />;
 SearchBar.label = SearchBarLabel;
 SearchBar.button = SearchBarButton;
 
