@@ -4,7 +4,6 @@ import {
   getPageProperties,
 } from "@/app/_services/notionAPI";
 import RichText from "@molecules/RichText";
-import RichTag from "@molecules/RichTag";
 import RichImage from "@molecules/RichImage";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { multi_select, title } from "@/app/_types/notionAPITypes";

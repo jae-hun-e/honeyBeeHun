@@ -10,6 +10,7 @@ import {
   RichTextItemResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 import { multi_select, title } from "@/app/_types/notionAPITypes";
+import Comments from "@molecules/Comments";
 
 export default async function DetailPost({
   params,
@@ -56,6 +57,7 @@ export default async function DetailPost({
             )
           );
         })}
+        <Comments className="w-full" />
       </div>
     </div>
   );
