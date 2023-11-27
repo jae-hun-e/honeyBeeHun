@@ -3,40 +3,53 @@ import { IPostData } from "@/app/_types/postType";
 import { ObjectId } from "mongodb";
 import Span from "@atoms/Span";
 import Comment from "@/app/(route)/posts/[id]/Comment";
+import { getPageContents, getPageProperties } from "@/app/_services/notionAPI";
+import RichText from "@molecules/RichText";
+import RichTag from "@molecules/RichTag";
+import RichImage from "@molecules/RichImage";
 
 export default async function DetailPost({
   params,
 }: {
   params: { id: string };
 }) {
-  const db = (await connectDB).db("blog");
-  const data = await db
-    .collection<IPostData>("posts")
-    .findOne({ _id: new ObjectId(params.id) });
+  const id = params.id;
 
-  if (data === null) return <div>없는 글이에요</div>;
+  const {
+    properties: { tag, title },
+  } = await getPageProperties(id);
+  const titleInfo = title.title[0];
+  const tagInfo = tag.multi_select[0];
 
-  const { title, content, date } = data;
-
-  const [year, month, day] = [
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDate(),
-  ];
+  const { results } = await getPageContents(id);
 
   return (
     <div className="w-full flex flex-col items-center mt-20 ">
       <div className="w-5/6 flex flex-col gap-5 border-2 rounded-xl p-4">
-        <h1
-          dangerouslySetInnerHTML={{ __html: title }}
-          className="text-center "
-        ></h1>
-        <Span text={`${year}년 ${month}월 ${day}일`} styleProps="text-end" />
-        <div dangerouslySetInnerHTML={{ __html: content }}></div>
+        {/*title*/}
+        <div className="flex justify-center">
+          <RichText textInfo={titleInfo} />
+          <RichTag tagInfo={tagInfo} />
+        </div>
+        {/*content*/}
+        {results.map((content, idx) => {
+          if (content[content.type].type === "file") {
+            return (
+              <RichImage
+                url={content[content.type].file.url}
+                key={content.id}
+              />
+            );
+          }
+
+          const textInfo = content[content.type]?.rich_text[0];
+          console.log(textInfo);
+
+          return textInfo && <RichText textInfo={textInfo} key={content.id} />;
+        })}
       </div>
 
       <div>댓글 기능</div>
-      <Comment id={params.id} />
     </div>
   );
 }

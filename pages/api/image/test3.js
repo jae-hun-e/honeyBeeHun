@@ -14,6 +14,7 @@ const parsedFormData = async (request) =>
   });
 
 export default async function handler(req, res) {
+  console.log("req.body", req.body);
   const { fields, files } = await parsedFormData(req);
 
   console.log("fields", fields);

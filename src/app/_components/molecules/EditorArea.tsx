@@ -14,7 +14,7 @@ interface Size {
   width?: number;
 }
 const EditorArea = ({ onSave, initialValue, editorRef, size }: IProps) => {
-  const url = "/api/image/test3";
+  const url = "/api/image/test";
 
   const handleImageUpload_1 = async (
     blobInfo: any,
@@ -47,30 +47,30 @@ const EditorArea = ({ onSave, initialValue, editorRef, size }: IProps) => {
 
     const formData = new FormData();
     // 이미지 파일 추가
-    // formData.append("image", blobInfo.blob(), blobInfo.filename());
+    formData.append("image", blobInfo.blob(), blobInfo.filename());
     // formData.append("image", file, blobInfo.filename());
 
-    // fetch(url, {
-    //   method: "POST",
-    //   body: formData,
-    //   // headers: {
-    //   //   "Content-Type": "application/json",
-    //   // },
-    // })
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Error("이미지 업로드 실패");
-    //     }
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     console.log("성공!", data.imageUrl);
-    //     success(data.imageUrl);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //     // failure("이미지 업로드 실패");
-    //   });
+    fetch(url, {
+      method: "POST",
+      body: formData,
+      // headers: {
+      //   "Content-Type": "application/json",
+      // },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("이미지 업로드 실패");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("성공!", data.imageUrl);
+        success(data.imageUrl);
+      })
+      .catch((error) => {
+        console.error(error);
+        // failure("이미지 업로드 실패");
+      });
   };
 
   const plugins = [
@@ -109,7 +109,7 @@ const EditorArea = ({ onSave, initialValue, editorRef, size }: IProps) => {
     toolbar,
     content_style,
     // images_upload_url: url,
-    images_upload_handler: handleImageUpload,
+    // images_upload_handler: handleImageUpload,
   };
 
   const [content, _] = useState(initialValue);
@@ -129,3 +129,30 @@ const EditorArea = ({ onSave, initialValue, editorRef, size }: IProps) => {
 };
 
 export default EditorArea;
+
+// const file = input.files;
+// if (file !== null) {
+//   formData.append("image", file[0]);
+//   try {
+//     const result = await client
+//         .post("communities/posts/images", formData)
+//         .then((res) => res.data);
+//     const imgUrl = result.results.image;
+//     setBackdropUrl(imgUrl);
+//     const editor = quillRef.current?.getEditor();
+//     const range = editor?.getSelection();
+//     editor?.insertEmbed(range.index, "image", imgUrl);
+//     // const range = quillRef.current?.getEditor().getSelection()?.index.tsx;
+//     //  if (range !== null && range !== undefined) {
+//     //    let quill = quillRef.current?.getEditor();
+//     //    quill?.setSelection(range, 1);
+//     //    quill?.clipboard.dangerouslyPasteHTML(
+//     //      range,
+//     //      '<img src=${imgUrl} alt="이미지 태그 삽입"/>'
+//     //    );
+//     //  }
+//     //  return { ...result, sucess: true };
+//   } catch (e) {
+//     console.log(e, "ErrorMessage");
+//   }
+// }
