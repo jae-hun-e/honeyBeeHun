@@ -19,11 +19,11 @@ const ToggleBtn = ({ onToggleClick }: IProps) => {
     >
       <span
         className={cls(
-          enabled ? "translate-x-5" : "translate-x-1",
+          enabled ? "translate-x-4" : "-translate-x-1",
           "inline-block h-6 w-4 transform rounded-full transition"
         )}
       >
-        {enabled ? "🌙" : "☀️"}
+        {enabled ? "☀️" : "🌙"}
       </span>
     </Switch>
   );

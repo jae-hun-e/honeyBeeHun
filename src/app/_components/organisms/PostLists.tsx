@@ -1,6 +1,6 @@
 import { WithId } from "mongodb";
 import { IPostData } from "@/app/_types/postType";
-import LinkBtn from "@molecules/LinkBtn";
+import LinkBtn from "@atoms/LinkBtn";
 import DeleteBtn from "@molecules/DeleteBtn";
 import PostThumbnail from "@organisms/PostThumbnail";
 

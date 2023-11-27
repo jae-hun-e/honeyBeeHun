@@ -9,6 +9,7 @@ import {
   PartialBlockObjectResponse,
   RichTextItemResponse,
 } from "@notionhq/client/build/src/api-endpoints";
+import { multi_select, title } from "@/app/_types/notionAPITypes";
 
 export default async function DetailPost({
   params,
@@ -20,19 +21,8 @@ export default async function DetailPost({
   const {
     properties: { tag, title },
   } = (await getPageProperties(id)) as PageObjectResponse;
-  const titleInfo = (
-    title as {
-      type: "title";
-      title: Array<RichTextItemResponse>;
-      id: string;
-    }
-  ).title;
-  const tagInfo = (
-    tag as {
-      type: "multi_select";
-      multi_select: Array<{ id: string; name: string; color: string }>;
-    }
-  ).multi_select;
+  const titleInfo = (title as title).title;
+  const tagInfo = (tag as multi_select).multi_select;
 
   const { results } = await getPageContents(id);
 
@@ -41,7 +31,7 @@ export default async function DetailPost({
       <div className="w-5/6 flex flex-col gap-5 border-2 rounded-xl p-4">
         {/*title*/}
         <div className="flex justify-center">
-          <RichText textInfo={titleInfo} />
+          <RichText textInfo={titleInfo} type="title" />
           <RichTag tagInfo={tagInfo} />
         </div>
         {/*content*/}
@@ -58,7 +48,15 @@ export default async function DetailPost({
 
           const textInfo = content[content.type]?.rich_text;
 
-          return textInfo && <RichText textInfo={textInfo} key={content.id} />;
+          return (
+            textInfo && (
+              <RichText
+                textInfo={textInfo}
+                key={content.id}
+                type={content.type}
+              />
+            )
+          );
         })}
       </div>
 

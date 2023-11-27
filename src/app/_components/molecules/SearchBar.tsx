@@ -40,7 +40,7 @@ const SearchBar = ({ children, className, shareState }: IProps) => {
   );
 };
 
-SearchBar.input = <Input />;
+SearchBar.input = SearchBarInput;
 SearchBar.label = SearchBarLabel;
 SearchBar.button = SearchBarButton;
 

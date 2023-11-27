@@ -5,6 +5,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import ToggleBtn from "@molecules/ToggleBtn";
 import Link from "next/link";
+import LinkBtn from "@atoms/LinkBtn";
 
 const Header = () => {
   const [mounted, setMounted] = useState(false);
@@ -30,22 +31,25 @@ const Header = () => {
   };
   return (
     <div className="flex justify-between items-center w-full h-[50px]  px-5">
-      <Link href="/">
+      <LinkBtn
+        href="/"
+        className="mr-10 no-underline text-black dark:text-white"
+      >
         <Span text="HBH" />
-      </Link>
+      </LinkBtn>
       <div>
-        <Link
+        <LinkBtn
           href="/posts"
           className="mr-10 no-underline text-black dark:text-white"
         >
           Posts
-        </Link>
-        <Link
+        </LinkBtn>
+        <LinkBtn
           href="/jjh"
           className="mr-10 no-underline text-black dark:text-white"
         >
           About Me
-        </Link>
+        </LinkBtn>
       </div>
       <div>
         <ToggleBtn

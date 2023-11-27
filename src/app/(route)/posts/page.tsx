@@ -9,6 +9,8 @@ import {
   PageObjectResponse,
   RichTextItemResponse,
 } from "@notionhq/client/build/src/api-endpoints";
+import { multi_select, title } from "@/app/_types/notionAPITypes";
+import LinkBtn from "@atoms/LinkBtn";
 
 const columns = ["title", "tag"];
 export const dynamic = "force-dynamic";
@@ -27,26 +29,16 @@ export default async function Posts() {
       {posts.map((post: PageObjectResponse) => {
         const id = post.id;
         const properties = post.properties;
-        console.log("properties", properties);
-        const title = (
-          properties[columns[0]] as {
-            type: "title";
-            title: Array<RichTextItemResponse>;
-            id: string;
-          }
-        ).title;
-        const tag = (
-          properties[columns[1]] as {
-            type: "multi_select";
-            multi_select: Array<{ id: string; name: string; color: string }>;
-          }
-        ).multi_select;
+
+        const title = (properties[columns[0]] as title).title;
+        console.log(title);
+        const tag = (properties[columns[1]] as multi_select).multi_select;
 
         return (
-          <Link key={id} href={`/posts/${id}`}>
-            <RichText textInfo={title} />
+          <LinkBtn key={id} href={`/posts/${id}`}>
+            <RichText textInfo={title} type="title" />
             <RichTag tagInfo={tag} />
-          </Link>
+          </LinkBtn>
         );
       })}
     </div>
