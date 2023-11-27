@@ -3,25 +3,29 @@ import { RichTextItemResponse } from "@notionhq/client/build/src/api-endpoints";
 import styled from "styled-components";
 import { AnnotationResponse } from "@/app/_types/notionAPITypes";
 import Link from "next/link";
+import { cls } from "@/app/_lib/utils";
 
 const RichText = ({
   textInfo,
   type,
+  className = "",
 }: {
   textInfo: RichTextItemResponse[];
   type: string;
+  className?: string;
 }) => {
   return (
-    <div className="flex flex-wrap">
+    <div className={cls("flex flex-wrap", className)}>
       {textInfo.map((textInfo, idx) => {
         if (textInfo.type === "text") {
           const { text, annotations, plain_text, href } = textInfo;
 
           if (text.link)
             return <SLink href={text.link.url}>{plain_text}</SLink>;
-
           if (type === "title")
             return <div className="text-[4rem]">{plain_text}</div>;
+          if (type === "thumnail")
+            return <div className="text-[2rem]">{plain_text}</div>;
           if (type === "heading_1") return <h1>{plain_text}</h1>;
           if (type === "heading_2") return <h2>{plain_text}</h2>;
           if (type === "heading_3") return <h3>{plain_text}</h3>;

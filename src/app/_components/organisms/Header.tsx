@@ -17,10 +17,18 @@ const Header = () => {
   }, []);
   if (!mounted) {
     return (
-      <div className="flex justify-between items-center w-full h-[50px]  px-5">
-        <Span text="HBH" />
+      <div className="flex justify-between items-center w-full h-[50px] ">
+        <Span
+          text="HBH"
+          className="mr-10 no-underline text-black dark:text-white ml-3"
+        />
         <div>
-          <ToggleBtn onToggleClick={() => {}} text="현재 Dark모드"></ToggleBtn>
+          <Span text="Posts" className="mr-10 text-black dark:text-white" />
+          <Span text="Tags" className=" text-black dark:text-white" />
+        </div>
+
+        <div>
+          <ToggleBtn onToggleClick={() => {}}></ToggleBtn>
         </div>
       </div>
     );
@@ -30,32 +38,20 @@ const Header = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
   return (
-    <div className="flex justify-between items-center w-full h-[50px]  px-5">
-      <LinkBtn
-        href="/"
-        className="mr-10 no-underline text-black dark:text-white"
-      >
-        <Span text="HBH" />
+    <div className="flex justify-between items-center w-full h-[50px] ">
+      <LinkBtn href="/" className=" no-underline text-black dark:text-white">
+        <Span text="HBH" className="ml-3" />
       </LinkBtn>
       <div>
-        <LinkBtn
-          href="/posts"
-          className="mr-10 no-underline text-black dark:text-white"
-        >
+        <LinkBtn href="/posts" className="mr-10 text-black dark:text-white">
           Posts
         </LinkBtn>
-        <LinkBtn
-          href="/jjh"
-          className="mr-10 no-underline text-black dark:text-white"
-        >
-          About Me
+        <LinkBtn href="/tags" className="text-black dark:text-white">
+          Tags
         </LinkBtn>
       </div>
       <div>
-        <ToggleBtn
-          onToggleClick={handleTheme}
-          text={systemTheme ? "현재 Dark모드" : "현재 light모드"}
-        ></ToggleBtn>
+        <ToggleBtn onToggleClick={handleTheme}></ToggleBtn>
       </div>
     </div>
   );

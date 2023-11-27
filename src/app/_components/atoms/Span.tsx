@@ -1,14 +1,14 @@
 import { Size, Weight } from "@/app/_types/globalEnum";
 
 interface IProps {
-  styleProps?: string;
+  className?: string;
   text: string;
   size?: Size;
   weight?: Weight;
 }
 
 const Span = ({
-  styleProps,
+  className,
   size = Size.regular,
   text,
   weight = Weight.regular,
@@ -18,7 +18,7 @@ const Span = ({
     fontWeight: weight,
   };
   return (
-    <span className={styleProps} style={style}>
+    <span className={className} style={style}>
       {text}
     </span>
   );

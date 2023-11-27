@@ -16,6 +16,31 @@ const notion: Client = new Client({
 export const getPageList = async (): Promise<QueryDatabaseResponse> => {
   const db: QueryDatabaseResponse = await notion.databases.query({
     database_id: notionDatabaseId,
+    filter: {
+      property: "myInfo",
+      checkbox: {
+        equals: false,
+      },
+    },
+    sorts: [
+      {
+        timestamp: "last_edited_time",
+        direction: "descending",
+      },
+    ],
+  } as QueryDatabaseParameters);
+  return db;
+};
+
+export const getMyPage = async (): Promise<QueryDatabaseResponse> => {
+  const db: QueryDatabaseResponse = await notion.databases.query({
+    database_id: notionDatabaseId,
+    filter: {
+      property: "myInfo",
+      checkbox: {
+        equals: true,
+      },
+    },
   } as QueryDatabaseParameters);
   return db;
 };
@@ -27,7 +52,6 @@ export const getPageProperties = async (
   return post;
 };
 
-// block가져오기
 export const getPageContents = async (
   id: string
 ): Promise<ListBlockChildrenResponse> => {

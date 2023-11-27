@@ -45,9 +45,7 @@ export default async function DetailPost({
               />
             );
           }
-
           const textInfo = content[content.type]?.rich_text;
-
           return (
             textInfo && (
               <RichText
@@ -59,8 +57,6 @@ export default async function DetailPost({
           );
         })}
       </div>
-
-      <div>댓글 기능</div>
     </div>
   );
 }

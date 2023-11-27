@@ -3,7 +3,6 @@ import { Switch } from "@headlessui/react";
 import { cls } from "@/app/_lib/utils";
 interface IProps {
   styleProps?: string;
-  text?: string;
   onToggleClick(event: React.FormEvent<HTMLButtonElement>): void;
 }
 const ToggleBtn = ({ onToggleClick }: IProps) => {

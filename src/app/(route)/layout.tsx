@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className}   h-[100vh]`}>
+      <body className={`${inter.className}   h-[100vh] m-0 p-0`}>
         <Providers>
           <RecoilRootProvider>
             <Header />
