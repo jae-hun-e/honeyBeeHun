@@ -24,7 +24,7 @@ const Header = () => {
         />
         <div>
           <Span text="Posts" className="mr-10 text-black dark:text-white" />
-          <Span text="Tags" className=" text-black dark:text-white" />
+          <Span text="Tags" className="text-black dark:text-white" />
         </div>
 
         <div>
@@ -38,8 +38,8 @@ const Header = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
   return (
-    <div className="flex justify-between items-center w-full h-[50px] ">
-      <LinkBtn href="/" className=" no-underline text-black dark:text-white">
+    <div className="flex justify-between items-center w-full h-[50px] bg-main dark:bg-main-dark">
+      <LinkBtn href="/" className="no-underline text-black dark:text-white">
         <Span text="HBH" className="ml-3" />
       </LinkBtn>
       <div>
