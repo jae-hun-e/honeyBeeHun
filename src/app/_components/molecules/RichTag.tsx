@@ -1,10 +1,23 @@
 "use client";
 import styled from "styled-components";
 
-const RichText = ({ tagInfo }) => {
-  const { id, name, color } = tagInfo;
-
-  return <STag color={color}> {name}</STag>;
+const RichText = ({
+  tagInfo,
+}: {
+  tagInfo: Array<{ id: string; name: string; color: string }>;
+}) => {
+  return (
+    <div>
+      {tagInfo.map((tag) => {
+        const { id, name, color } = tag;
+        return (
+          <STag color={color} key={id}>
+            {name}
+          </STag>
+        );
+      })}
+    </div>
+  );
 };
 
 const STag = styled.span`

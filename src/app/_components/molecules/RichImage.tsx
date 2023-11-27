@@ -1,4 +1,4 @@
-const RichImage = ({ url }) => {
+const RichImage = ({ url }: { url: string }) => {
   return <img src={url} />;
 };
 

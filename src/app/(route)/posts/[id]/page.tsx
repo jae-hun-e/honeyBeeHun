@@ -1,12 +1,14 @@
-import { connectDB } from "@/app/_services/datebaseConnect";
-import { IPostData } from "@/app/_types/postType";
-import { ObjectId } from "mongodb";
-import Span from "@atoms/Span";
-import Comment from "@/app/(route)/posts/[id]/Comment";
 import { getPageContents, getPageProperties } from "@/app/_services/notionAPI";
 import RichText from "@molecules/RichText";
 import RichTag from "@molecules/RichTag";
 import RichImage from "@molecules/RichImage";
+import {
+  BlockObjectResponse,
+  ListBlockChildrenResponse,
+  PageObjectResponse,
+  PartialBlockObjectResponse,
+  RichTextItemResponse,
+} from "@notionhq/client/build/src/api-endpoints";
 
 export default async function DetailPost({
   params,
@@ -17,9 +19,20 @@ export default async function DetailPost({
 
   const {
     properties: { tag, title },
-  } = await getPageProperties(id);
-  const titleInfo = title.title[0];
-  const tagInfo = tag.multi_select[0];
+  } = (await getPageProperties(id)) as PageObjectResponse;
+  const titleInfo = (
+    title as {
+      type: "title";
+      title: Array<RichTextItemResponse>;
+      id: string;
+    }
+  ).title;
+  const tagInfo = (
+    tag as {
+      type: "multi_select";
+      multi_select: Array<{ id: string; name: string; color: string }>;
+    }
+  ).multi_select;
 
   const { results } = await getPageContents(id);
 
@@ -32,7 +45,8 @@ export default async function DetailPost({
           <RichTag tagInfo={tagInfo} />
         </div>
         {/*content*/}
-        {results.map((content, idx) => {
+        {/*  todo any 타입 변경하기*/}
+        {results.map((content: any, idx) => {
           if (content[content.type].type === "file") {
             return (
               <RichImage
@@ -42,8 +56,7 @@ export default async function DetailPost({
             );
           }
 
-          const textInfo = content[content.type]?.rich_text[0];
-          console.log(textInfo);
+          const textInfo = content[content.type]?.rich_text;
 
           return textInfo && <RichText textInfo={textInfo} key={content.id} />;
         })}
